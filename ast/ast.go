@@ -16,12 +16,13 @@
 package ast
 
 import (
-	"code.google.com/p/gographviz/token"
 	"errors"
 	"fmt"
 	"math/rand"
 	"sort"
 	"strings"
+
+	"code.google.com/p/gographviz/token"
 )
 
 var (
@@ -192,7 +193,6 @@ func NewSubGraph(id, l Elem) (*SubGraph, error) {
 	if l != nil {
 		g.StmtList = l.(StmtList)
 	}
-	fmt.Printf("%#v\n", g)
 	return g, nil
 }
 

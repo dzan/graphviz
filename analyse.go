@@ -14,10 +14,7 @@
 
 package gographviz
 
-import (
-	"code.google.com/p/gographviz/ast"
-	"fmt"
-)
+import "code.google.com/p/gographviz/ast"
 
 //Creates a Graph structure by analysing an Abstract Syntax Tree representing a parsed graph.
 func NewAnalysedGraph(graph *ast.Graph) *Graph {
@@ -69,7 +66,6 @@ type stmtVisitor struct {
 func (this *stmtVisitor) Visit(v ast.Elem) ast.Visitor {
 	switch s := v.(type) {
 	case ast.NodeStmt:
-		fmt.Printf("NodeStmt %#v\n", s)
 		return this.nodeStmt(s)
 	case ast.EdgeStmt:
 		return this.edgeStmt(s)
@@ -152,7 +148,6 @@ func (this *stmtVisitor) graphAttrs(stmt ast.GraphAttrs) ast.Visitor {
 }
 
 func (this *stmtVisitor) subGraph(stmt *ast.SubGraph) ast.Visitor {
-	fmt.Printf("reading %#v\n", stmt)
 	subGraphName := stmt.Id.String()
 	this.g.AddSubGraph(this.graphName, subGraphName, this.currentGraphAttrs)
 	return newStmtVisitor(this.g, subGraphName)
